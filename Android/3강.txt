@@ -1,0 +1,61 @@
+사용자 인터페이스))
+자바 Swing은 너무 리소스를 많이 잡아먹음 => 사용안함
+
+그래서 안드로이드에서 최적화된 인터페이스 컨트롤 사용(버튼, 리스트, 대화상자 등등)
+
+UI 생성하는 절차
+1. 뷰 그룹 2. 뷰그룹 추가 3. 액티비티 화면으로 설정
+
+activity_main : res/layout/. : 프로그램 실행 중 변경 불가능
+
+ui xml, java code : 프로그램 실행 중 변경 가능하다(어떤 조작을해서)
+
+여러 레이아웃은 책에있음^^
+LinearLayout은 선형레이아웃이며 해당 배치를 어떻게할지 알려준다=>android:orientation="vertical" 속성값(수직)
+그리고 각 레이아웃안에 레이아웃배치도 가능하다.(레이아웃 자체도 이름을 가질수 있다)
+
+(main.xml) : android:text="@string/btn1_name" <====== (string.xml)  <string name="btn2_name">2nd Btn</string>
+// 모든 문자열을 관리한다.
+
+색상, 보이기 속성 .. 은 나중에 필요할때 ㄱㄱ
+
+마진과 패딩
+마진은 자식 뷰 주위의 여백
+패딩은 뷰의 경계와 뷰의 내용물 사이의 간격 
+
+에디트 텍스트 (심플)
+
+andorid : each type
+그중에 inputType이 제일중요함
+inputType의 속성 변경시 setInputType메서드 호출하자. 
+
+    <EditText
+        android:id="@+id/edit3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="010-XXXX-XXXX"
+        android:inputType="phone"
+        />
+
+이미지 뷰
+android : each type ( src important ) = setImageResource(int) // xml, java 
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="100dp"
+        android:maxWidth="200dp"
+        android:adjustViewBounds="true"
+        android:tint="#80ff0000"
+        android:src="@drawable/cat"
+        />
+
+버튼 
+토글버튼, @+id/toggle_button
+
+테이블 레이아웃)***
+각 텍스트와 에디트 텍스트의 묶음
+
+코드로 레이아웃만들기 117page
+
+취지 : 디자인은 xml, 기능은 자바^^ 물론 따르진않아도됨 ㅇㅇ 

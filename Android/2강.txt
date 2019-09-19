@@ -1,0 +1,39 @@
+애플리 케이션의 구성
+Activity = java + XML + Sound => Android
+
+사용자 인터페이스 XML = UI 작성.
+자바 코드 = 화면은 전환하거나 어떤 기능적인면
+매니페스트 파일 XML = 목록
+
+액티비티, 매니페스트, 자바를 일단중요
+1. UI 
+ 1)프로그램시작 전에 화면에 놓여질것들을 미리 만들어 놓는것
+	버튼을 끌어다가 넣으면 코드를 생성!(XML)
+    <Button
+            android:text="Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:layout_editor_absoluteY="212dp"
+            tools:layout_editor_absoluteX="78dp" android:id="@+id/button"/>
+    <CheckBox
+            android:text="CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="74dp" tools:layout_editor_absoluteY="270dp"
+            tools:layout_editor_absoluteX="87dp" android:id="@+id/checkBox"/>
+	
+	xml 코드로 해당 컴포넌트, 속성을 바꿔준다.(최종)
+ 
+ 2) 자바 코드
+	미리안만들고 프로그램 실행 중에 돌림.
+res : picture, music 파일 drawable
+
+화면과 기능 분리ㅋㅋㅋ
+화면 2개이상시 레이아웃 등록하고 매니페스트에 등록한다. 그래야만 출력됨
+
+wrap_content vs match_parent // 해당 길이, 폭만큼만 가져주어라 vs 전체 내용을 쓰겠다.
+
+intent : 안드로이드에게 내가 하고자하는 의도를 알려주는것임 ㅋ
+ public void onClicked(View v){
+        Intent intent =  new Intent(Intent.ACTION_VIEW, Uri.parse("tel:010-7894-1561"));
+	//이 번호를 쓰겠다 -> 안드로이드는 해당 전화번호를 거는 곳으로 간다. 
+        startActivity(intent);
+    }
