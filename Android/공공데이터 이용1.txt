@@ -1,0 +1,66 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class MainActivity extends AppCompatActivity {
+    TextView tv;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tv = (TextView) findViewById(R.id.data);
+
+        String serviceUrl = "http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList";
+        String serviceKey="7HA8Wqyok1a7AC%2BQDwzqhc32gmgs4kL1pGkbsLoaYYiXwRdeYhJXJ%2FmMZ0WbuCOMyfqj3mdTnfVbYh2ff6Le6w%3D%3D";
+        String strSrch ="1164";
+        String strUrl = serviceUrl+"?ServiceKey="+serviceKey+"&strSrch="+strSrch;
+        new DownloadWebpageTask().execute(strUrl);
+
+    }
+    private class DownloadWebpageTask extends AsyncTask<String,Void, String>{
+        @Override
+        protected String doInBackground(String... urls) {
+            try{
+                return (String)downloadUrl((String)urls[0]);
+            }catch (IOException e){
+                return "download Fail";
+            }
+        }
+        protected void onPostExecute(String result){
+            tv.setText(result);
+        }
+        private String downloadUrl(String myurl) throws IOException{
+            HttpURLConnection conn = null;
+            try{
+             URL url = new URL(myurl);
+             conn = (HttpURLConnection) url.openConnection();
+                BufferedInputStream buf = new BufferedInputStream(conn.getInputStream());
+                BufferedReader bufReader = new BufferedReader(new InputStreamReader(buf, "utf-8"));
+                String line = null;
+                String page="";
+                while((line = bufReader.readLine()) != null){
+                    page+=line;
+                }
+                return page;
+            }finally {
+                conn.disconnect();
+            }
+        }
+    }
+
+}
+
+
+mainifest : <uses-permission android:name="android.permission.INTERNET" />
